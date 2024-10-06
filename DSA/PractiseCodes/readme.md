@@ -17,6 +17,8 @@
 12. **Rat In A Maze (Backtracking)** 🐭
 13. **Reversing A Linked List** 🔄
 14. **Implementation Of Stack Using Linked List** 📚
+15. **QuickSort** ➕
+16. **MergeSort** 🐭
 
 ---
 
