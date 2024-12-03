@@ -19,9 +19,12 @@
 14. **Implementation Of Stack Using Linked List** 📚
 15. **QuickSort** ➕
 16. **MergeSort** 🐭
+17. **Singly Linked List Implementation** 🌸
+18. **Circular Linked List Implementation** 🔍
+19. **Doubly Linked List Implementation** 🔗
 
 ---
 
-### 🧭 About the Project
+### 🧭 
 This contains all of the coding i did to make it through my DSAA course :3
 
