@@ -125,6 +125,7 @@ void deleteAtBeginning(Node *&head)
     delete temp;
 }
 
+
 // Function to delete a node from the end of the doubly
 // linked list.
 void deleteAtEnd(Node *&head)
