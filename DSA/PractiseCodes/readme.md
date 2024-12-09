@@ -22,6 +22,22 @@
 17. **Singly Linked List Implementation** 🌸
 18. **Circular Linked List Implementation** 🔍
 19. **Doubly Linked List Implementation** 🔗
+20. **Adjacency Lists** 🌸
+21. **Adjacency Matrix** 🔍
+22. AVL
+23. Breadth First Search Adjacency List
+24. Circular Linked List
+25. DFS Undirected Graph and Cycle Detection
+26. Dijkstra's Algorithm
+27. Doubly Linked List
+28. Edge In Adjacency List
+29. Edge In Adjacency Matrix
+30. Heap
+31. Linked List
+32. Kruskal's Algorithm
+33. Topological Sorting
+34. Vertex in List
+35. Vertex In Matrix
 
 ---
 
