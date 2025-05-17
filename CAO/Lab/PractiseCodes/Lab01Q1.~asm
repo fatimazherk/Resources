@@ -1,0 +1,42 @@
+; write code of scenario input a one digit number from keyboard 
+; save number to dl register
+; display number u entered in new line
+
+.model small
+.stack 100h
+
+.code    
+
+; Define newline proc FIRST
+newline proc
+    mov dl, 0Dh      ; Carriage return (start of line)
+    mov ah, 2
+    int 21h
+
+    mov dl, 0Ah      ; Line feed (move to next line)
+    mov ah, 2
+    int 21h
+
+    ret
+newline endp
+
+
+main proc
+    
+    mov ah,1     ; input with echo
+    int 21h 
+    
+    mov dl,al    ; save number in dl                        
+    
+    call newline ; to print number in new line
+    
+    mov ah, 2    ; single character output
+    int 21h    
+    
+    mov ah, 4ch  ; terminate program
+    int 21h                             
+    
+    main endp
+
+
+end main
