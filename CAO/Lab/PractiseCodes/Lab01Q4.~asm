@@ -1,0 +1,79 @@
+; design first letter of your name using suitable ascii codes
+
+.model small
+.stack 100h
+
+.data
+line1 db  '*********** ', 0ah, 0dh, '$'
+line2 db  '*********** ', 0ah, 0dh, '$'
+line3 db  '**** ', 0ah, 0dh, '$'
+line4 db  '**** ', 0ah, 0dh, '$'
+line5 db  '**** ', 0ah, 0dh, '$'
+line6 db  '******** ', 0ah, 0dh, '$'
+line7 db  '******** ', 0ah, 0dh, '$'
+line8 db  '**** ', 0ah, 0dh, '$'
+line9 db  '**** ', 0ah, 0dh, '$'
+line10 db '**** ', 0ah, 0dh, '$'
+line11 db '**** ', 0ah, 0dh, '$'
+line12 db '**** ', 0ah, 0dh, '$'
+
+.code
+main proc
+    mov ax,@data  ; loads the address of the data segment into the AX register
+    mov ds,ax     ; data segment mai ax daldia
+    
+    ;print each line
+    
+    mov dx, OFFSET line1
+    MOV ah, 9      ; string output
+    int 21h 
+    
+    mov dx, OFFSET line2
+    mov ah,9
+    int 21h    
+    
+    mov dx, OFFSET line3
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line4
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line5
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line6
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line7
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line8
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line9
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line10
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line11
+    mov ah,9
+    int 21h
+    
+    mov dx, OFFSET line12
+    mov ah,9
+    int 21h   
+    
+    mov ah,4ch
+    int 21h
+                   
+    main endp
+end main
