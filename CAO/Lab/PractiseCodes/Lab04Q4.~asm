@@ -1,0 +1,63 @@
+; write a program to swap numbers stored at value1 and value 2
+; assume val 1 is last digit of roll no
+; and val 2 is second digit of roll no
+
+.model small
+.stack 100h
+
+.data
+value1 db 2     ; last digit of roll no
+value2 db 4     ; second digit of roll no
+msg1 db 'After swapping:', 0Dh, 0Ah, '$'
+msg2 db 'Value1 = $'
+msg3 db 0Dh, 0Ah, 'Value2 = $'
+
+.code
+main proc
+    mov ax, @data
+    mov ds, ax
+
+    ; Load values into registers
+    mov al, value1
+    mov bl, value2
+
+    ; Swap values using xchg
+    xchg al, bl
+
+    ; Store swapped values back
+    mov value1, al
+    mov value2, bl
+
+    ; --- Display result ---
+    ; Show message
+    lea dx, msg1
+    mov ah, 9
+    int 21h
+
+    lea dx, msg2
+    mov ah, 9
+    int 21h
+
+    ; Display value1 (now in variable)
+    mov dl, value1
+    add dl, 30h     ; convert to ASCII
+    mov ah, 2
+    int 21h
+
+    ; New line
+    lea dx, msg3
+    mov ah, 9
+    int 21h
+
+    ; Display value2
+    mov dl, value2
+    add dl, 30h
+    mov ah, 2
+    int 21h
+
+    ; Terminate program
+    mov ah, 4Ch
+    int 21h
+
+main endp
+end main
