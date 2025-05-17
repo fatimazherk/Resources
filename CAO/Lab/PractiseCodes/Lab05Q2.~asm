@@ -1,0 +1,47 @@
+; x-2y+2z
+
+.model small
+.stack 100h
+.data
+x db 8
+y db 3
+z db 2
+result db ?
+msg db 'x-2y+2z=$'
+newline db 0dh,0ah,'$'
+
+.code
+main proc
+    mov ax,@data
+    mov ds,ax
+    
+    ; x-2y+2z
+    mov al,x
+    mov bl,y
+    add bl,y 
+    sub al,bl
+    mov bl,z
+    add bl,z
+    add al,bl
+    add al,30h
+    mov result, al
+    
+    mov dx, offset msg
+    mov ah,9
+    int 21h
+    
+    mov dl, result
+    mov ah,2
+    int 21h
+    
+    mov dx, offset newline
+    mov ah, 9
+    int 21h
+    
+    mov ah,4ch
+    int 21h
+    
+    main endp
+end main
+                 
+                 
