@@ -4,11 +4,6 @@ org 100h
 .model small
 .stack 100h
 
-.data
-input_buffer db 20           ; max number of characters user can type
-actual_length db ?           ; actual number of characters typed
-input_string db 20 dup(?)    ; buffer to store typed characters
-
 .code
 main proc
 mov ah,2
