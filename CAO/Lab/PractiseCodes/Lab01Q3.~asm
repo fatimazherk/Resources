@@ -1,0 +1,54 @@
+; display name through ascii code one char at a time
+
+.model small
+.stack 100h
+
+.code
+newline proc
+    mov dl,0dh
+    mov ah,2
+    int 21h
+    
+    mov dl,0ah
+    mov ah,2
+    int 21h
+    
+    ret
+    
+    newline endp
+
+main proc
+    
+     
+     mov dl, 46h
+     mov ah, 2               ; F
+     int 21h
+     call newline
+     
+     mov dl, 61h             ; a
+     mov ah,2
+     int 21h
+     call newline
+     
+     mov dl, 74h 
+     mov ah,2                ; t
+     int 21h
+     call newline
+     
+     mov dl, 6ch             ; i
+     mov ah,2
+     int 21h
+     call newline
+     
+     mov dl, 6dh             ; m
+     mov ah,2
+     int 21h
+     call newline
+     
+     mov dl, 61h             ; a
+     mov ah,2
+     int 21h
+     call newline
+     
+     main endp
+end main
