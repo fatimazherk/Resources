@@ -1,0 +1,80 @@
+; assume num 1 and num 2, generate output num1+num2=a num1-num2=b num1*num2=c num1/num2=d
+
+.model small
+.stack 100h
+
+.data
+    num1 db 3
+    num2 db 2
+    a db ?        ; sum
+    b db ?        ; diff
+    c db ?        ; product
+    d db ?        ; quotient
+
+    msg1 db 'Num1 + Num2 = $'
+    msg2 db 0Dh,0Ah, 'Num1 - Num2 = $'
+    msg3 db 0Dh,0Ah, 'Num1 * Num2 = $'
+    msg4 db 0Dh,0Ah, 'Num1 / Num2 = $'
+
+.code
+main proc
+    mov ax, @data
+    mov ds, ax
+
+    ; ADDITION
+    mov al, num1
+    add al, num2
+    add al, 30h
+    mov a, al
+    lea dx, msg1
+    mov ah, 9
+    int 21h
+    mov dl, a
+    mov ah, 2
+    int 21h
+
+    ; SUBTRACTION
+    mov al, num1
+    sub al, num2
+    add al, 30h
+    mov b, al
+    lea dx, msg2
+    mov ah, 9
+    int 21h
+    mov dl, b
+    mov ah, 2
+    int 21h
+
+    ; MULTIPLICATION
+    mov al, num1
+    mov bl, num2
+    mul bl             ; AX = AL * BL
+    add al, 30h        ; only handling one-digit result
+    mov c, al
+    lea dx, msg3
+    mov ah, 9
+    int 21h
+    mov dl, c
+    mov ah, 2
+    int 21h
+
+    ; DIVISION
+    mov ax, 0          ; clear AX
+    mov al, num1
+    mov bl, num2
+    div bl             ; AL = quotient, AH = remainder
+    add al, 30h
+    mov d, al
+    lea dx, msg4
+    mov ah, 9
+    int 21h
+    mov dl, d
+    mov ah, 2
+    int 21h
+
+    ; Exit
+    mov ah, 4Ch
+    int 21h
+
+main endp
+end main
