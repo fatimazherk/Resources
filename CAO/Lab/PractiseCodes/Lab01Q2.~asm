@@ -1,0 +1,22 @@
+
+
+; input first letter of name no echo
+
+.model small
+.stack 100h
+
+.code
+
+main proc
+    mov ah, 8      ; Read char with no echo (DOS)
+    int 21h          ; result in AL
+
+    mov dl, al       ; move to DL for output
+    mov ah, 2        ; single char output
+    int 21h
+
+    mov ah, 4Ch
+    int 21h
+main endp
+
+end main
