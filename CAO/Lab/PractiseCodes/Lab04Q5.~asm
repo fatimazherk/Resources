@@ -1,0 +1,23 @@
+; write code for this output
+; c 
+;  a
+;   o                          
+
+.model small
+.stack 100h 
+.data 
+ var db 'C',0AH,'A',0AH,'O','$'
+.code
+ main proc
+    mov ax,@data
+    mov ds,ax
+    
+    lea dx,var
+    mov ah,09h
+    int 21h
+    
+    mov ah,4ch
+    int 21h
+    
+    main endp
+ end main
