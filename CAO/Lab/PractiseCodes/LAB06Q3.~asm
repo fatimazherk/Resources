@@ -1,0 +1,48 @@
+.model small             ; Use small memory model (code & data < 64KB)
+.stack 100h              ; Allocate 256 bytes for the stack
+
+.data
+loc1 db 'Enter Number: $'                  ; Prompt message
+loc2 db 0dh,0ah, 'Number Is Even $'        ; Message if number is even
+loc3 db 0dh,0ah, 'Number Is Odd $'         ; Message if number is odd
+num  db ?                                  ; Variable to store the number input by the user
+
+.code
+main proc
+    mov ax, @data        ; Load address of data segment into AX
+    mov ds, ax           ; Set DS (data segment) to point to the data
+
+    lea dx, loc1         ; Load address of "Enter Number" prompt
+    mov ah, 9            ; DOS function to display string
+    int 21h              ; Call DOS interrupt
+
+    mov ah, 1            ; DOS function to get a single character from user input
+    int 21h              ; Call DOS interrupt — result stored in AL
+    mov num, al          ; Store user input (as ASCII character) into 'num'
+    sub al, 30h          ; Convert ASCII digit to integer (e.g., '5' → 5)
+    mov bl, al           ; Store number in BL for safekeeping
+
+    mov al, bl           ; Move the number to AL (to be divided)
+    mov ah, 00           ; Clear AH before division (needed for DIV)
+    mov cl, 02           ; Store 2 in CL (we will divide by 2)
+    div cl               ; AL / CL → quotient in AL, remainder in AH
+    cmp ah, 00           ; Check if remainder is 0 (even number)
+    je even_label        ; If yes, jump to even_label
+
+odd_label:               ; Label for odd number output
+    lea dx, loc3         ; Load "Number Is Odd" message
+    mov ah, 9            ; DOS function to display string
+    int 21h              ; Call DOS interrupt
+    jmp exit             ; Skip the even label and exit
+
+even_label:              ; Label for even number output
+    lea dx, loc2         ; Load "Number Is Even" message
+    mov ah, 9            ; DOS function to display string
+    int 21h              ; Call DOS interrupt
+
+exit:
+    mov ah, 4ch          ; DOS function to exit program
+    int 21h              ; Call DOS interrupt
+
+main endp
+end main                 ; Mark 'main' as entry point
