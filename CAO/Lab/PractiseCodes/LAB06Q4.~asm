@@ -1,0 +1,67 @@
+
+
+; find largest num using atleast one conditional and unconditional jmp instruction
+
+.model small
+.stack 100h
+
+.data
+msg1 db 'Enter Number 1:$'                       ; Prompt for first number
+msg2 db 0dh,0ah, 'Enter Number 2:$'              ; Prompt for second number
+msg3 db 0dh,0ah, 'Largest Number Is: $'          ; Message before showing result
+num1 db ?                                        ; Variable to store first number
+num2 db ?                                        ; Variable to store second number
+
+.code
+main proc
+    mov ax, @data       ; Initialize data segment
+    mov ds, ax
+
+    ; Prompt and input first number
+    lea dx, msg1        ; Load message 1
+    mov ah, 9           ; DOS print string function
+    int 21h             ; Print "Enter Number 1:"
+
+    mov ah, 01h         ; DOS input function (single char)
+    int 21h             ; Get input in AL
+    sub al, 30h         ; Convert ASCII to integer
+    mov num1, al        ; Store input in num1
+
+    ; Prompt and input second number
+    lea dx, msg2
+    mov ah, 9
+    int 21h             ; Print "Enter Number 2:"
+
+    mov ah, 1
+    int 21h             ; Get second number input
+    sub al, 30h
+    mov num2, al
+
+    ; Compare num1 and num2
+    mov al, num1        ; Load num1 into AL
+    cmp al, num2        ; Compare AL with num2
+    ja num1_larger      ; If AL > num2, jump to num1_larger
+
+    ; If num2 is larger or equal
+    mov bl, num2        ; Store num2 in BL (largest number)
+    jmp display_result  ; Unconditional jump to display part
+
+num1_larger:
+    mov bl, num1        ; num1 is larger ? store in BL
+
+display_result:
+    lea dx, msg3        ; Print "Largest Number Is:"
+    mov ah, 9
+    int 21h
+
+    mov dl, bl          ; Move result to DL (to be printed)
+    add dl, 30h         ; Convert integer to ASCII
+    mov ah, 2           ; DOS function to print character
+    int 21h
+
+    ; Exit program
+    mov ah, 4ch
+    int 21h
+
+main endp
+end main
