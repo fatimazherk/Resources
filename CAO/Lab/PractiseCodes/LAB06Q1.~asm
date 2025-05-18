@@ -1,0 +1,19 @@
+ 
+;assembly program that repeatedly (forever) calculates 1*2*3..n
+
+org 100h
+.model small
+.stack 100h
+.code
+
+main proc
+    mov ax, 1          ; initialize result to 1
+    mov bx, 1          ; initialize multiplier
+
+forever:
+    inc bx             ; bx = bx + 1
+    mul bx             ; ax = ax * bx (result in ax, high bits in dx)
+    jmp forever        ; infinite loop
+
+main endp
+end main
